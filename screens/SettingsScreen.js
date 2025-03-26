@@ -1,23 +1,24 @@
 import React from "react"
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
 import Ionicons from '@expo/vector-icons/Ionicons'; 
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
-const StartupMenu = ({ navigation }) => {
+const SettingsScreen = ({ navigation }) => {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>SPEDEN NOPEUSTESTI</Text>
+        <Text style={styles.title}>ASETUKSET</Text>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={[styles.button, { backgroundColor: '#3CB440' }]} onPress={() => navigation.navigate('Play')}>
-            <Ionicons name="play" size={32} color="black" />
+          <TouchableOpacity style={[styles.button, { backgroundColor: '#00FF00' }]} /*onPress={() =>} TODO: ADD TOGGLEABLE SOUND ON/OFF*/> 
+            <Ionicons name="volume-medium-sharp" size={32} color="black" />
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, { backgroundColor: '#CC4848' }]} onPress={() => navigation.navigate('Info')}>
-            <Ionicons name="help" size={32} color="black" />
+          <TouchableOpacity style={[styles.button, { backgroundColor: '#FF0000' }]} /*onPress={() =>} TODO: ADD TOGGLEABLE HAPTIC FEEDBACK ON/OFF*/>
+            <MaterialIcons name="vibration" size={32} color="black" />
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, { backgroundColor: '#375EBF' }]} onPress={() => navigation.navigate('HighScores')}>
-            <Ionicons name="trophy" size={32} color="black" />
+          <TouchableOpacity style={[styles.button, { backgroundColor: '#0000AA' }]} /*onPress={() =>} TODO: ADD DIFFICULTY CHANGER*/>
+            <Ionicons name="star" size={32} color="black" />
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, { backgroundColor: '#CEDB1B' }]} onPress={() => navigation.navigate('SettingsScreen')}>
-            <Ionicons name="settings" size={32} color="black" />
+          <TouchableOpacity style={[styles.button, { backgroundColor: '#FFFF00' }]} onPress={() => navigation.goBack()}>
+            <Ionicons name="arrow-back" size={32} color="black" />
           </TouchableOpacity>
         </View>
       </View>
@@ -57,5 +58,5 @@ const StartupMenu = ({ navigation }) => {
       marginHorizontal: 10,
     },
   });
-  
-  export default StartupMenu;
+
+  export default SettingsScreen;
