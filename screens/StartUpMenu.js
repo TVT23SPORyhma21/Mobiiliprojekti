@@ -1,24 +1,25 @@
 import React from "react"
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
 import Ionicons from '@expo/vector-icons/Ionicons'; 
+import HapticButton from "../components/hapticButton";
 
 const StartupMenu = ({ navigation }) => {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>SPEDEN NOPEUSTESTI</Text>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={[styles.button, { backgroundColor: '#3CB440' }]} onPress={() => navigation.navigate('Play')}>
+          <HapticButton  style={[styles.button, { backgroundColor: '#3CB440' }]} onPress={() => navigation.navigate('Play')}>
             <Ionicons name="play" size={32} color="black" />
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, { backgroundColor: '#CC4848' }]} onPress={() => navigation.navigate('Info')}>
+          </HapticButton >
+          <HapticButton  style={[styles.button, { backgroundColor: '#CC4848' }]} onPress={() => navigation.navigate('Info')}>
             <Ionicons name="help" size={32} color="black" />
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, { backgroundColor: '#375EBF' }]} onPress={() => navigation.navigate('HighScores')}>
+          </HapticButton >
+          <HapticButton  style={[styles.button, { backgroundColor: '#375EBF' }]} onPress={() => navigation.navigate('HighScores')}>
             <Ionicons name="trophy" size={32} color="black" />
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, { backgroundColor: '#CEDB1B' }]} onPress={() => navigation.navigate('SettingsScreen')}>
+          </HapticButton >
+          <HapticButton  style={[styles.button, { backgroundColor: '#CEDB1B' }]} onPress={() => navigation.navigate('SettingsScreen')}>
             <Ionicons name="settings" size={32} color="black" />
-          </TouchableOpacity>
+          </HapticButton >
         </View>
       </View>
     );
@@ -44,13 +45,13 @@ const StartupMenu = ({ navigation }) => {
       bottom: 50,
       flexDirection: 'row',
       justifyContent: 'space-around',
-      width: '80%',
+      width: '90%',
     },
     button: {
-      width: 80,
-      height: 80,
-      borderRadius: 50,
-      borderWidth: 2,
+      width: 110,
+      height: 110,
+      borderRadius: 55,
+      borderWidth: 2.5,
       borderColor: "black",
       justifyContent: 'center',
       alignItems: 'center',
