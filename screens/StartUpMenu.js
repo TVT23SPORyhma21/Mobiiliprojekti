@@ -14,7 +14,7 @@ const StartupMenu = ({ navigation }) => {
           <HapticButton  style={[styles.button, { backgroundColor: '#CC4848' }]} onPress={() => navigation.navigate('Info')}>
             <Ionicons name="help" size={32} color="black" />
           </HapticButton >
-          <HapticButton  style={[styles.button, { backgroundColor: '#375EBF' }]} onPress={() => navigation.navigate('HighScores')}>
+          <HapticButton  style={[styles.button, { backgroundColor: '#375EBF' }]} onPress={() => navigation.navigate('HighScoreScreen')}>
             <Ionicons name="trophy" size={32} color="black" />
           </HapticButton >
           <HapticButton  style={[styles.button, { backgroundColor: '#CEDB1B' }]} onPress={() => navigation.navigate('SettingsScreen')}>
