@@ -1,63 +1,79 @@
-import React from "react";
-import { View, Text, Modal, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, Modal, StyleSheet, ScrollView } from 'react-native';
+import React from 'react';
+import Ionicons from '@expo/vector-icons/Ionicons'; 
+import HapticButton from "../components/hapticButton";
 
-export default function HelpPopup({ visible, setVisible, advice }) {
-  return (
+const HelpPopup = ({ visible, onClose }) => { 
+  return ( 
     <Modal
-      visible={visible}
-      transparent={true}
       animationType="fade"
-      onRequestClose={() => setVisible(false)}
+      transparent={true}
+      visible={visible}
+      onRequestClose={onClose}
     >
-      <View style={styles.modalOverlay}>
-        <View style={styles.modalContent}>
-          <Text style={styles.modalTitle}>Help Information</Text>
-          <Text style={styles.adviceText}>{advice}</Text>
-          <TouchableOpacity style={styles.closeButton} onPress={() => setVisible(false)}>
-            <Text style={styles.closeText}>Close</Text>
-          </TouchableOpacity>
+      <View style={styles.overlay}>
+        <View style={styles.container}> 
+          <Text style={styles.title}>SPEDEN NOPEUSTESTIN OHJEET</Text> 
+          <ScrollView style={styles.scrollView}> 
+            <Text style={styles.text}>1. Paina nappia, jossa valo on palanut mahdollisimman nopeaa</Text>
+            <Text style={styles.text}>2. etc.</Text>
+          </ScrollView>
+          <View style={styles.buttonContainer}>
+            <HapticButton style={[styles.button, { backgroundColor: '#CEDB1B' }]} onPress={onClose}>
+              <Ionicons name="arrow-back" size={42} color="black" />
+            </HapticButton>
+          </View>
         </View>
       </View>
     </Modal>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  modalOverlay: {
+  overlay: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 1000, 
+    backgroundColor: 'rgba(255, 255, 255, 0)',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  modalContent: {
-    backgroundColor: "white", 
+  container: {
+    width: '50%',
+    backgroundColor: 'green',
+    borderRadius: 5,
     padding: 20,
-    borderRadius: 10,
-    width: "80%",
-    alignItems: "center",
-    zIndex: 1001, 
+    alignItems: 'center',
   },
-  modalTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#D9D9D9',
     marginBottom: 10,
   },
-  adviceText: {
-    fontSize: 16,
-    textAlign: "center",
-    marginBottom: 20,
+  buttonContainer: {
+    marginTop: 20,
   },
-  closeButton: {
-    marginTop: 15,
-    backgroundColor: "#007BFF",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
+  button: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    borderWidth: 2.5,
+    borderColor: "green",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  closeText: {
+  scrollView: {
+    width: '100%',
+    maxHeight: 150,
+    backgroundColor: "green",
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: "green",
+    padding: 5,
+  },
+  text: {
     color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
+    fontSize: 15,
+  }
 });
+
+export default HelpPopup;
