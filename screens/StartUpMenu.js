@@ -14,29 +14,33 @@ const StartupMenu = ({ navigation }) => {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>SPEDEN NOPEUSTESTI</Text>
-        <View style={styles.buttonContainer}>
-          <HapticButton style={[styles.button, { backgroundColor: '#3CB440' }]} onPress={() => navigation.navigate('Play')}>
-            <Ionicons name="play" size={32} color="black" />
-          </HapticButton>
-          <HapticButton style={[styles.button, { backgroundColor: '#CC4848' }]} onPress={handleHelpPress}>
-            <Ionicons name="help" size={32} color="black" />
-          </HapticButton>
-          <HapticButton style={[styles.button, { backgroundColor: '#375EBF' }]} onPress={() => navigation.navigate('HighScoreScreen')}>
+      <Text style={styles.title}>SPEDEN NOPEUSTESTI</Text>
+      <View style={styles.buttonContainer}>
+        <HapticButton style={[styles.button, { backgroundColor: '#3CB440' }]} onPress={() => navigation.navigate('Play')}>
+        <Ionicons name="play" size={32} color="black" />
+        </HapticButton>
+        <HapticButton style={[styles.button, { backgroundColor: '#CC4848' }]} onPress={handleHelpPress}>
+        <Ionicons name="help" size={32} color="black" />
+        </HapticButton>
+        <HapticButton style={[styles.button, { backgroundColor: '#375EBF' }]} onPress={() => navigation.navigate('HighScoreScreen')}>
 
-            <Ionicons name="trophy" size={32} color="black" />
-          </HapticButton>
-          <HapticButton style={[styles.button, { backgroundColor: '#CEDB1B' }]} onPress={() => navigation.navigate('SettingsScreen')}>
-            <Ionicons name="settings" size={32} color="black" />
-          </HapticButton>
-        </View>
+        <Ionicons name="trophy" size={32} color="black" />
+        </HapticButton>
+        <HapticButton style={[styles.button, { backgroundColor: '#CEDB1B' }]} onPress={() => navigation.navigate('SettingsScreen')}>
+        <Ionicons name="settings" size={32} color="black" />
+        </HapticButton>
+      </View>
 
-       
-        <HelpPopup
-          visible={helpVisible}
-          setVisible={setHelpVisible}
-          advice="This is the StartUpMenu. Use the buttons to navigate to different sections of the app."
-        />
+      <HelpPopup
+        visible={helpVisible}
+        setVisible={setHelpVisible}
+        advice={`Tervetuloa Speden Nopeustestiin! Tässä pelissä testaat nopeuttasi ja tarkkuuttasi.\n\n
+  Ohjeet:\n
+  1. Paina 'Play' aloittaaksesi pelin.\n
+  2. Paina 'Help' saadaksesi lisätietoja.\n
+  3. Paina 'High Score' nähdäksesi parhaat tulokset.\n
+  4. Paina 'Settings' muuttaaksesi asetuksia.`}
+      />
       </View>
     );
 };
