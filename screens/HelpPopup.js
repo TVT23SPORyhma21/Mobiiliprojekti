@@ -1,54 +1,76 @@
-import { View, Text, Modal, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import React, { useEffect } from 'react';
-import Ionicons from '@expo/vector-icons/Ionicons'; 
-import HapticButton from "../components/hapticButton";
+import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 
-const HelpPopup = ({ visible, setVisible, advice }) => { 
-  const navigation = useNavigation();
-
-  useEffect(() => {
-    const beforeRemoveListener = (e) => {
-      e.preventDefault();
-      setVisible(false);
-    };
-    navigation.addListener('beforeRemove', beforeRemoveListener);
-
-    return () => {
-      navigation.removeListener('beforeRemove', beforeRemoveListener);
-    };
-  }, [navigation, setVisible]);
-
-  return ( 
-    <Modal
-      animationType="fade"
-      transparent={true}
-      visible={visible}
-      onRequestClose={() => setVisible(false)}
-    >
-      <View style={styles.overlay}>
-        <View style={styles.container}> 
-          <Text style={styles.title}>SPEDEN NOPEUSTESTIN OHJEET</Text> 
-          <ScrollView style={styles.scrollView}> 
-            <Text style={styles.text}>{advice}</Text>
+const HelpPopup = ({ visible, setVisible, advice }) => {
+  if (!visible) return null;
+  
+  
+  let formattedText = advice;
+  if (advice && advice.includes("Ohjeet:")) {
+    
+    const parts = advice.split("Ohjeet:");
+    
+    return (
+      <View style={styles.fullScreenOverlay}>
+        <View style={styles.container}>
+          <Text style={styles.title}>SPEDEN NOPEUSTESTIN OHJEET</Text>
+          
+          
+          <ScrollView style={styles.scrollContainer}>
+            <View style={styles.textContainer}>
+              <Text style={styles.text}>{parts[0]}</Text>
+              <Text style={styles.text}>Ohjeet:</Text>
+              <Text style={styles.compactText}>{parts[1]}</Text>
+            </View>
           </ScrollView>
-          <View style={styles.buttonContainer}>
-            <HapticButton style={styles.backButton} onPress={() => setVisible(false)}>
-              <Text style={styles.backButtonText}>Back</Text>
-            </HapticButton>
-          </View>
+          
+          <TouchableOpacity 
+            style={styles.closeButton} 
+            onPress={() => setVisible(false)}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.closeButtonText}>Close</Text>
+          </TouchableOpacity>
         </View>
       </View>
-    </Modal>
+    );
+  }
+  
+  
+  return (
+    <View style={styles.fullScreenOverlay}>
+      <View style={styles.container}>
+        <Text style={styles.title}>SPEDEN NOPEUSTESTIN OHJEET</Text>
+        
+        <ScrollView style={styles.scrollContainer}>
+          <View style={styles.textContainer}>
+            <Text style={styles.text}>{advice}</Text>
+          </View>
+        </ScrollView>
+        
+        <TouchableOpacity 
+          style={styles.closeButton} 
+          onPress={() => setVisible(false)}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.closeButtonText}>Close</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  overlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  fullScreenOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)',
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: 999,
   },
   container: {
     width: '80%',
@@ -56,6 +78,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 20,
     alignItems: 'center',
+    maxHeight: '70%', 
   },
   title: {
     fontSize: 24,
@@ -63,37 +86,32 @@ const styles = StyleSheet.create({
     color: '#D9D9D9',
     marginBottom: 10,
   },
-  buttonContainer: {
-    marginTop: 20,
-  },
-  button: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    borderWidth: 2.5,
-    borderColor: 'green',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  scrollView: {
+  scrollContainer: {
     width: '100%',
-    maxHeight: 150,
-    backgroundColor: 'green',
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: 'green',
-    padding: 5,
+    marginBottom: 15, 
+  },
+  textContainer: {
+    width: '100%',
+    paddingBottom: 5, 
   },
   text: {
     color: 'white',
     fontSize: 15,
+    lineHeight: 22,
   },
-  backButton: {
+  compactText: {
+    color: 'white',
+    fontSize: 15,
+    lineHeight: 16, 
+  },
+  closeButton: {
     backgroundColor: "#CEDB1B",
     padding: 10,
     borderRadius: 5,
+    minWidth: 100,
+    alignItems: 'center',
   },
-  backButtonText: {
+  closeButtonText: {
     fontSize: 16,
     fontWeight: "bold",
     color: "#000",
