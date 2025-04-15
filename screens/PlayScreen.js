@@ -106,10 +106,11 @@ const PlayScreen = ({ navigation }) => {
     setCurrentColor(null);
     setButtonPressed(false);
     console.log("Peli ohi!, tulos:", score);
-
+  
     try {
       if (score > 0) {
-        const success = await saveHighscore(score);
+        
+        const success = await saveHighscore(score, difficulty);
         if (!success) {
           console.log("highscoren tallenus Firebaseen ei onnistunut");
         }
@@ -117,7 +118,7 @@ const PlayScreen = ({ navigation }) => {
     } catch (error) {
       console.error("Error in gameOver:", error.message, error.code);
     }
-
+  
     navigation.replace("GameOver", { score });
   };
 
