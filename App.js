@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import StartUpMenu from "./screens/StartUpMenu"
 import SettingsScreen from './screens/SettingsScreen';
-import { HapticProvider } from "./context/HapticContext";
+import { SettingsProvider } from "./context/SettingsContext";
 import HighScoreScreen from './screens/HighScoreScreen';
 import PlayScreen from './screens/PlayScreen';
 import GameOverScreen from './screens/GameOverScreen';
@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 export default function App(){
   return (
     <NavigationContainer>
-      <HapticProvider>
+      <SettingsProvider>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={StartUpMenu} />
           <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
@@ -21,7 +21,7 @@ export default function App(){
           <Stack.Screen name="PlayScreen" component={PlayScreen} />
           <Stack.Screen name="GameOver" component={GameOverScreen} />
         </Stack.Navigator>
-      </HapticProvider>
+      </SettingsProvider>
     </NavigationContainer>
   );
 };

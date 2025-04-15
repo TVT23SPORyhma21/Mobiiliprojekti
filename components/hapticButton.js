@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { TouchableOpacity } from "react-native";
 import * as Haptics from 'expo-haptics';
-import { HapticContext } from "../context/HapticContext";
+import { SettingsContext } from "../context/SettingsContext";
 
 const HapticButton = ({ onPress, onPressIn, style, children }) => {
-    const { hapticsEnabled } = useContext(HapticContext);
+    const { hapticsEnabled } = useContext(SettingsContext);
   
     const handlePressIn = () => {
         if (hapticsEnabled) Haptics.selectionAsync();
