@@ -3,10 +3,11 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
 import Ionicons from '@expo/vector-icons/Ionicons'; 
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import HapticButton from "../components/hapticButton";
-import { HapticContext } from "../context/HapticContext";
+import { SettingsContext } from "../context/SettingsContext";
 
 const SettingsScreen = ({ navigation }) => {
-    const { hapticsEnabled, toggleHaptics } = useContext(HapticContext);
+  const { hapticsEnabled, toggleHaptics, difficulty, setDifficulty } = useContext(SettingsContext);
+
 
     return (
       <View style={styles.container}>
@@ -30,9 +31,18 @@ const SettingsScreen = ({ navigation }) => {
 
           <HapticButton name="Difficulty"
             style={[styles.button, { backgroundColor: '#0000AA' }]}
-            onPress={() => console.log("Change difficulty (TODO)")}
+            onPress={() => {
+              const next = difficulty === "easy" ? "medium" : difficulty === "medium" ? "hard" : "easy";
+              setDifficulty(next);
+            }}
           >
-            <Ionicons name="star" size={42} color="black" />
+            <Ionicons name=
+              {difficulty === "easy"
+              ? "star-outline"
+              : difficulty === "medium"
+              ? "star-half"
+              : "star"} 
+            size={42} color="black" />
           </HapticButton>
 
           <HapticButton name="Back"

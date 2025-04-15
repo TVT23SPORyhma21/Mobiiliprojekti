@@ -1,31 +1,42 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback, useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import HapticButton from "../components/hapticButton";
 import { saveHighscore } from "../firebase/saveHighscore";
+import { SettingsContext } from "../context/SettingsContext";
 
 const PlayScreen = ({ navigation }) => {
   const [score, setScore] = useState(0);
   const [currentColor, setCurrentColor] = useState(null);
   const [isUserTurn, setIsUserTurn] = useState(false);
-  const [gameSpeed, setGameSpeed] = useState(2000);
+  const [gameSpeed, setGameSpeed] = useState(5000);
   const [previousColor, setPreviousColor] = useState(null);
   const timeoutRef = useRef(null);
   const buttonColors = ["#3CB440", "#CC4848", "#375EBF", "#CEDB1B"];
   const [buttonPressed, setButtonPressed] = useState(false);
+  const { difficulty } = useContext(SettingsContext);
+
+  const DIFFICULTY_SPEEDS = {
+    easy: 2800,
+    medium: 2000,
+    hard: 1300,
+  };
 
   useEffect(() => {
     startGame();
     return () => clearTimeout(timeoutRef.current);
-  }, []);
+  }, [difficulty]);
 
   const startGame = () => {
     console.log("Starting game...");
+    const initialSpeed = DIFFICULTY_SPEEDS[difficulty] ?? 2000;
+    console.log(initialSpeed)
     setScore(0);
-    setGameSpeed(2000);
+    setGameSpeed(initialSpeed);
     setPreviousColor(null);
     setCurrentColor(null);
     setButtonPressed(false);
     setIsUserTurn(false);
+
     setTimeout(() => {
       console.log("Delay finished, starting first round");
       nextRound();
@@ -54,8 +65,8 @@ const PlayScreen = ({ navigation }) => {
       timeoutRef.current = setTimeout(() => {
         console.log("Reaction timeout triggered");
         gameOver();
-      }, gameSpeed);
-    }, gameSpeed / 2);
+      }, 0); //kuinka kauan nappi pysyy sammuneena KUN PELI ON JO HÄVITTY koska ei rekisteröi painallusta enää siinä vaiheessa
+    }, gameSpeed); //kuinka kauan nappi/valo pysyy päällä
   };
 
   const handleButtonPress = async (index) => {
@@ -82,7 +93,7 @@ const PlayScreen = ({ navigation }) => {
 
       setTimeout(() => {
         nextRound();
-      }, 300);
+      }, 0); //kuinka kauan että seuraava valo syttyy jos painaa oikeaa nappia ajoissa
     } else {
       console.log("Väärää nappia painettu");
       gameOver();
