@@ -1,17 +1,18 @@
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '../firebase/Config';
+import { db } from './Config';
 
-export const saveHighscore = async (score) => {
+export const saveHighscore = async (score, difficulty) => {
   try {
-    if (score <= 0) return false; // ei talleneta 0 tulosta
-    await addDoc(collection(db, 'highscores'), {
-      score,
-      timestamp: serverTimestamp(),
-    });
-    console.log("Highscore lisätty onnistuneesti, score:", score);
+    const highscoreData = {
+      score, // pelaajan score
+      timestamp: serverTimestamp(), // serverin kellon aika
+      difficulty // pelin vaikeustaso
+    };
+
+    await addDoc(collection(db, 'highscores'), highscoreData);
     return true;
   } catch (error) {
-    console.error("Error saving highscore:", error.message, error.code);
+    console.error('Error saving highscore:', error);
     return false;
   }
 };
