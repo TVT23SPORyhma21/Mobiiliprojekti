@@ -16,7 +16,7 @@ const StartupMenu = ({ navigation }) => {
       <View style={styles.container}>
       <Text style={styles.title}>SPEDEN NOPEUSTESTI</Text>
       <View style={styles.buttonContainer}>
-        <HapticButton style={[styles.button, { backgroundColor: '#3CB440' }]} onPress={() => navigation.navigate('Play')}>
+        <HapticButton style={[styles.button, { backgroundColor: '#3CB440' }]} onPress={() => navigation.navigate('PlayScreen')}>
         <Ionicons name="play" size={32} color="black" />
         </HapticButton>
         <HapticButton style={[styles.button, { backgroundColor: '#CC4848' }]} onPress={handleHelpPress}>

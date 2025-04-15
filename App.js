@@ -5,7 +5,8 @@ import StartUpMenu from "./screens/StartUpMenu"
 import SettingsScreen from './screens/SettingsScreen';
 import { HapticProvider } from "./context/HapticContext";
 import HighScoreScreen from './screens/HighScoreScreen';
-
+import PlayScreen from './screens/PlayScreen';
+import GameOverScreen from './screens/GameOverScreen';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,8 @@ export default function App(){
           <Stack.Screen name="Home" component={StartUpMenu} />
           <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
           <Stack.Screen name="HighScoreScreen" component={HighScoreScreen} />
+          <Stack.Screen name="PlayScreen" component={PlayScreen} />
+          <Stack.Screen name="GameOver" component={GameOverScreen} />
         </Stack.Navigator>
       </HapticProvider>
     </NavigationContainer>
